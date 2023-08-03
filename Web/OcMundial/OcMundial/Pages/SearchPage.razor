@@ -1,0 +1,35 @@
+﻿@page "/"
+@using BlazorApp1.Data.Services;
+
+<section class="row">
+    <p>Reservation Results for Seocho-gu from 25/11/2022 for 1 night</p>
+</section>
+<section class="row">
+    @foreach (var propriedade in ListaPropriedades)
+    {
+        <div class="col-xl-3 col-md-4 col-sm-6 col-6">
+            <div class="card border border-dark">
+                <div class="card-body">
+                    <img height="150" width="150" />
+                    <p>@propriedade.Titulo</p>
+                    <div>
+                        <label>@propriedade.Area</label>
+                        <label>Pessoas @propriedade.Pessoas</label>
+                    </div>
+                    <label>total price: @propriedade.Preco $</label>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@code {
+    [Inject]
+   private ItemService itemService { get; set; }
+
+    IList<Propriedade> ListaPropriedades;
+    protected override Task OnInitializedAsync()
+    {
+        var items = itemService.GetItems();
+        return base.OnInitializedAsync();
+    }
+}
