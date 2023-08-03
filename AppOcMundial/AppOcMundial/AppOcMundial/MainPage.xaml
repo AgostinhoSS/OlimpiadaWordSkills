@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial.MainPage">
+
+    <StackLayout Spacing="0">
+        <StackLayout VerticalOptions="Start" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="55">
+            <Label Margin="20,0" Text="Owner / Manager App" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" FontSize="20" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="Start" Padding="50">
+            <Image Source="logo.png"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20">
+            <Label Text="Please Login to the System" FontSize="20" Margin="25,10" HorizontalTextAlignment="Center"/>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Username:" FontSize="20" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" x:Name="txtNome"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Password:"  FontSize="20" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" x:Name="txtSenha" IsPassword="True"/>
+            </StackLayout>
+            <Button Text="Login" Margin="25" FontSize="20" HorizontalOptions="End" WidthRequest="180" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

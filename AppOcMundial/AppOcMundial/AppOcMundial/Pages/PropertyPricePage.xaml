@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial.Pages.PropertyPrice">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <StackLayout VerticalOptions="Start" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="55">
+                <Label Margin="20,0" x:Name="lblTitulo" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" FontSize="20" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout HeightRequest="200">
+                <ListView BackgroundColor="Red">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image/>
+                                    <Label Text="{Binding Data}"/>
+                                    <Label Text="{Binding Price}"/>
+                                    <Label Text="{Binding Rules}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Listing Price" Margin="25,10" FontSize="20"/>
+                <Grid Margin="20" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="From:"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="To:"/>
+                    <Entry Grid.Column="0" Grid.Row="1"/>
+                    <Image Grid.Column="0" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
+                    <Entry Grid.Column="1" Grid.Row="1"/>
+                    <Image Grid.Column="1" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
+                </Grid>
+
+                <Grid Margin="20" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="On the weekend" FontSize="17"/>
+                    <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50"/>
+                    <Picker Grid.Row="0" Grid.Column="2"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="On the holidays" FontSize="17"/>
+                    <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50"/>
+                    <Picker Grid.Row="1" Grid.Column="2"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="On other days" FontSize="17"/>
+                    <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50"/>
+                    <Picker Grid.Row="2" Grid.Column="2"/>
+                    <Button Text="Set price" Grid.Row="3" Grid.Column="2"/>
+                </Grid>
+            </StackLayout>
+            <Button HorizontalOptions="End" VerticalOptions="End" Margin="10" Text="Sair" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

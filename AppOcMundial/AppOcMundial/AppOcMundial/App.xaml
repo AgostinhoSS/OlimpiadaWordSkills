@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" >
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        Black
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" >
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        Black
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial.Pages.PropertyPage">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0">
+            <StackLayout VerticalOptions="Start" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="55">
+                <Label Margin="20,0" Text="Your Listings:" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" FontSize="20" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+            </StackLayout>
+
+            <!--<ListView x:Name="lvProperties" HasUnevenRows="True"  SeparatorVisibility="Default" SeparatorColor="White">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5,15" Margin="0,0" BackgroundColor="LightGray" x:Name="slPropriedade">
+                                <Frame Margin="10,0" Padding="1" IsClippedToBounds="True" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="Center" CornerRadius="100">
+                                    <Image Source="download.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="Fill"/>
+                                </Frame>
+                                <StackLayout Orientation="Vertical" Margin="0">
+                                    <Label Text="{Binding Title}" VerticalOptions="Start" FontSize="16"/>
+                                    <Label Text="{Binding Date}" VerticalOptions="End"/>
+                                </StackLayout>
+                                <ImageButton AutomationId="{Binding id}" CornerRadius="100" Source="coin.png" HorizontalOptions="EndAndExpand" Margin="10,0" VerticalOptions="Center" WidthRequest="35" HeightRequest="35" Clicked="ImageButton_Clicked"/>
+                                -->
+            <!--<Image AutomationId="{Binding id}" Source="coin.png" HorizontalOptions="EndAndExpand" Margin="10,0" VerticalOptions="Center" WidthRequest="35" HeightRequest="35" Aspect="Fill">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>-->
+            <!--
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" x:Name="ListaPropriedades" VerticalOptions="FillAndExpand">
+
+                    <!-- ADICIONAR ITEM DA LISA DE PROPRIEDADES -->
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+        <Button Grid.Row="0" WidthRequest="80" HeightRequest="80" VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Black" TextColor="White" Margin="8" CornerRadius="100" Text="Voltar" Clicked="Button_Clicked"/>
+
+
+    </Grid>
+</ContentPage>
