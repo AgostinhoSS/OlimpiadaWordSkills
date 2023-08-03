@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using BlazorApp1.Data.Models;
 @using BlazorApp1.Data.Services;
 
 <section class="row">
@@ -11,12 +12,12 @@
             <div class="card border border-dark">
                 <div class="card-body">
                     <img height="150" width="150" />
-                    <p>@propriedade.Titulo</p>
+                    <p>@propriedade.Title</p>
                     <div>
-                        <label>@propriedade.Area</label>
-                        <label>Pessoas @propriedade.Pessoas</label>
+                        <label>@propriedade.AreaID</label>
+                        <label>Pessoas @propriedade.Capacity</label>
                     </div>
-                    <label>total price: @propriedade.Preco $</label>
+                    <label>total price: @propriedade.Price $</label>
                 </div>
             </div>
         </div>
@@ -26,10 +27,10 @@
     [Inject]
    private ItemService itemService { get; set; }
 
-    IList<Propriedade> ListaPropriedades;
+    IList<Items> ListaPropriedades;
     protected override Task OnInitializedAsync()
     {
-        var items = itemService.GetItems();
+        ListaPropriedades = itemService.GetItems();
         return base.OnInitializedAsync();
     }
 }

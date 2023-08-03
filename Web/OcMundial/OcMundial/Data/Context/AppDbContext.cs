@@ -9,7 +9,7 @@ namespace BlazorApp1.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=ComX;User ID=sa;Password=sql2017");
+            optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=ComX;User ID=sa;Password=sql2017;TrustServerCertificate=true");
         }
     }
 }

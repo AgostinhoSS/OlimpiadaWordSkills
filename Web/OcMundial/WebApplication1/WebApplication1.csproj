@@ -131,6 +131,7 @@
     <Content Include="Images\WSC2022SE_TP09_Logo_actual_en.png" />
     <Content Include="Pages\SearchPage.aspx" />
     <Content Include="PaginaBusca.aspx" />
+    <Content Include="PropertyDetail.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -235,6 +236,13 @@
       <DependentUpon>PaginaBusca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyDetail.aspx.cs">
+      <DependentUpon>PropertyDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PropertyDetail.aspx.designer.cs">
+      <DependentUpon>PropertyDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
