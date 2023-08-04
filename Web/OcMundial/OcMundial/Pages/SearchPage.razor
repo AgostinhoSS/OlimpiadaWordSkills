@@ -11,7 +11,9 @@
         <div class="col-xl-3 col-md-4 col-sm-6 col-6">
             <div class="card border border-dark">
                 <div class="card-body">
-                    <img height="150" width="150" />
+                    <a href="/details/@propriedade.Id">
+                        <img height="150" width="150" />
+                    </a>
                     <p>@propriedade.Title</p>
                     <div>
                         <label>@propriedade.AreaID</label>
@@ -25,7 +27,7 @@
 </section>
 @code {
     [Inject]
-   private ItemService itemService { get; set; }
+    private ItemService itemService { get; set; }
 
     IList<Items> ListaPropriedades;
     protected override Task OnInitializedAsync()

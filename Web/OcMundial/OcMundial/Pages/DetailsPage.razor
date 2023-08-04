@@ -1,4 +1,6 @@
-﻿@page "/details"
+﻿@page "/details/{Id}"
+@using BlazorApp1.Data.Services;
+@using OcMundial.Data.Models;
 
 <div class="row">
     <div class="col-12">
@@ -28,9 +30,10 @@
     </div>
     <div class="col-4 ">
         <p class="fw-bolder text-center">Available Amenities:</p>
-        <p class="text-center"> WIFI</p>
-        <p class="text-center"> TV - DVD</p>
-        <p class="text-center"> Bathroom</p>
+        @foreach (var item in listaAmenities)
+        {
+            <p class="text-center"> @item.Name</p>
+        }
     </div>
     <div class="col-4 align-items-end">
         <p class="text-end">Check-in: dd/mm/yyyy</p>
@@ -50,5 +53,17 @@
     </div>
 </div>
 @code {
+    [Parameter]
+    public string Id { get; set; }
 
+    [Inject]
+    ItemService itemAmenitie { get; set; }
+    //public string Mensagem => $"O id é{Id}";
+    List<ItemAmenitie> listaAmenities;
+    protected override Task OnInitializedAsync()
+    {
+        listaAmenities = itemAmenitie.GetItemsAmenities(int.Parse(Id));
+
+        return base.OnInitializedAsync();
+    }
 }

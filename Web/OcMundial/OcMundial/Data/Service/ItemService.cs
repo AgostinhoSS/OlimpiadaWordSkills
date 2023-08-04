@@ -1,6 +1,8 @@
 ﻿using BlazorApp1.Data.Context;
 using BlazorApp1.Data.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using OcMundial.Data.Models;
 
 namespace BlazorApp1.Data.Services
 {
@@ -23,6 +25,19 @@ namespace BlazorApp1.Data.Services
                          Areas ON Items.AreaID = Areas.ID";
             var result = _context.Items.FromSqlRaw(sql).ToList();
             return result;
+        }
+
+        public List<ItemAmenitie> GetItemsAmenities(int idItem)
+        {
+
+            var sql = @"SELECT        Items.ID, ItemAmenities.ItemID, Amenities.Name, Amenities.IconName
+                        FROM            Items INNER JOIN
+                                                    ItemAmenities ON Items.ID = ItemAmenities.ItemID INNER JOIN
+                                                    Amenities ON ItemAmenities.AmenityID = Amenities.ID
+                        WHERE        (ItemAmenities.ItemID = @idItem)";
+            var result = _context.ItemAmenitie.FromSqlRaw(sql, new { idItem }).ToList();
+            return result;
+
         }
     }
 }
