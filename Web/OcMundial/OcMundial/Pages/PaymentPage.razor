@@ -1,5 +1,34 @@
-﻿@page "/payment"
-<h3>PaymentPage</h3>
+﻿@page "/"
+
+<section class="row">
+    <div class="col-7 bg-secondary">
+        <div>
+
+            <span class="form-label"> Card Number</span>
+                <input class="form"/>
+            
+        </div>
+        <div>
+            <span> CVC</span>
+            <input class="form" />
+            <span> MM</span>
+            <input class="form" />
+            <span> YY</span>
+            <input class="form" />
+        </div>
+        <div>
+            <span> Password</span>
+            <input class="form" />
+        </div>
+    </div>
+    <div class="col-5 bg-primary">
+        <p>Payment Details</p>
+        <p>Fee:</p>
+        <p>Transaction ID:</p>
+        <p>Sale Description:</p>
+    </div>
+</section>
+
 
 @code {
 
