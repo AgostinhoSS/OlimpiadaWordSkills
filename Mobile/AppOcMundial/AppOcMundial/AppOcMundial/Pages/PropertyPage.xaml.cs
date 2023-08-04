@@ -63,11 +63,11 @@ namespace AppOcMundial.Pages
                 {
                     if (price.Date.AddDays(5) < DateTime.Now)
                     {
-                        label2 = new Label() { Text = "Last date of pricing:" + price.Date.ToString("DD/MM/yyyy"), VerticalOptions = LayoutOptions.End, TextColor = Color.Red };
+                        label2 = new Label() { Text = "Last date of pricing:" + price.Date.ToString("dd/MM/yyyy"), VerticalOptions = LayoutOptions.End, TextColor = Color.Red };
                     }
                     else
                     {
-                        label2 = new Label() { Text = "Last date of pricing:" + price.Date.ToString("DD/MM/yyyy"), VerticalOptions = LayoutOptions.End };
+                        label2 = new Label() { Text = "Last date of pricing:" + price.Date.ToString("dd/MM/yyyy"), VerticalOptions = LayoutOptions.End };
                     }
 
                 }
@@ -97,8 +97,9 @@ namespace AppOcMundial.Pages
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            string id = (sender as Image).AutomationId;
-            DisplayAlert("teste", id, "ok");
+            int id = Convert.ToInt32((sender as Image).AutomationId);
+
+            Navigation.PushAsync(new PropertyPrice(id));
         }
 
         private async void Button_Clicked(object sender, EventArgs e)

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial.Pages.PropertyPrice">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <StackLayout VerticalOptions="Start" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="55">
+                <Label Margin="20,0" x:Name="lblTitulo" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" FontSize="20" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout HeightRequest="200">
+                <ListView x:Name="lvRules">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <SwipeView>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image WidthRequest="40" BackgroundColor="Transparent"/>
+                                        <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" VerticalTextAlignment="Center" Padding="10,0"/>
+                                        <Label Text="{Binding Price,StringFormat='${0}'}"  VerticalTextAlignment="Center" Padding="10,0"/>
+                                        <Label Text="{Binding Name,StringFormat='({0} Rules)'}" VerticalTextAlignment="Center" Padding="10,0"/>
+                                    </StackLayout>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItem Text="Remove" BackgroundColor="Red" Invoked="SwipeItem_Invoked" CommandParameter="{Binding ID}"></SwipeItem>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItem Text="Edit" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" CommandParameter="{Binding ID}"></SwipeItem>
+                                    </SwipeView.RightItems>
+
+
+                                </SwipeView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="Listing Price" Margin="25,10" FontSize="20"/>
+                    <Grid Margin="20" Padding="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="From:"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="To:"/>
+                        <DatePicker Format="dd/MM/yyyy" Grid.Column="0" Grid.Row="1"/>
+                        <Image Grid.Column="0" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
+                        <DatePicker Format="dd/MM/yyyy" Grid.Column="1" Grid.Row="1"/>
+                        <Image Grid.Column="1" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
+                    </Grid>
+                    <Grid Margin="20" Padding="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="38"/>
+                            <RowDefinition Height="38"/>
+                            <RowDefinition Height="38"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="On the weekend" FontSize="17" VerticalTextAlignment="Center"/>
+                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50" FontSize="17"/>
+                        <Picker Grid.Row="0" Grid.Column="2" Title="Select the rule" x:Name="rule1" FontSize="17"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="On the holidays" FontSize="17" VerticalTextAlignment="Center"/>
+                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50" FontSize="17"/>
+                        <Picker Grid.Row="1" Grid.Column="2" Title="Select the rule" x:Name="rule2" FontSize="17"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="On other days" FontSize="17" VerticalTextAlignment="Center"/>
+                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" WidthRequest="50" FontSize="17"/>
+                        <Picker Grid.Row="2" Grid.Column="2" Title="Select the rule" x:Name="rule3" FontSize="17"/>
+                        <Button Text="Set price" Grid.Row="3" Grid.Column="2"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Button HorizontalOptions="End" VerticalOptions="End" Margin="10" Text="Sair" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

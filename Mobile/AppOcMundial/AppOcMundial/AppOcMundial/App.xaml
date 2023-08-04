@@ -11,6 +11,13 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="Picker" >
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        Black
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <Style TargetType="Button" >
                 <Setter Property="TextColor">
                     <Setter.Value>

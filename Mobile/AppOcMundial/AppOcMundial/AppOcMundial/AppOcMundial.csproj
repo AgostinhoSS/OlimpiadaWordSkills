@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\PropertyPricePage.xaml.cs">
-      <DependentUpon>PropertyPricePage.xaml</DependentUpon>
+    <Compile Update="Pages\PropertyPrice.xaml.cs">
+      <DependentUpon>PropertyPrice.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -27,7 +27,7 @@
     <EmbeddedResource Update="Pages\PropertyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PropertyPricePage.xaml">
+    <EmbeddedResource Update="Pages\PropertyPrice.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
