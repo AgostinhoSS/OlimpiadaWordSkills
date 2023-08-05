@@ -1,32 +1,74 @@
-﻿@page "/"
+﻿@page "/payment"
 
-<section class="row">
-    <div class="col-7 bg-secondary">
-        <div>
+<section class="row m-5">
+    <div class="col-7">
+        <div class="row ">
+            <div class="col-12 pb-2">
+                <div class="row">
+                    <div class="col-3">
+                        <label class=""> Card Number</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" />
+                    </div>
+                </div>
+            </div>
 
-            <span class="form-label"> Card Number</span>
-                <input class="form"/>
-            
-        </div>
-        <div>
-            <span> CVC</span>
-            <input class="form" />
-            <span> MM</span>
-            <input class="form" />
-            <span> YY</span>
-            <input class="form" />
-        </div>
-        <div>
-            <span> Password</span>
-            <input class="form" />
+            <div class="col-12 py-2">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <label class="col-3"> CVC</label>
+                            <div class="col-9">
+                                <input class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="row">
+                            <label class="col-3"> MM</label>
+                            <div class="col-9">
+                                <input class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="row">
+                            <label class="col-3"> YY</label>
+                            <div class="col-9">
+                                <input class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 py-2">
+                <div class="row">
+                    <label class="col-2"> Password</label>
+                    <div class="col-10">
+                        <input class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 py-2">
+                <button class="btn btn-success">Pay Now ($90)</button>
+                <button class="btn btn-danger">Cancel</button>
+            </div>
         </div>
     </div>
-    <div class="col-5 bg-primary">
+    <div class="col-5">
         <p>Payment Details</p>
         <p>Fee:</p>
         <p>Transaction ID:</p>
         <p>Sale Description:</p>
+
     </div>
+
 </section>
 
 

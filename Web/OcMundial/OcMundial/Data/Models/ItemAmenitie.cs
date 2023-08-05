@@ -1,8 +1,9 @@
 ﻿namespace OcMundial.Data.Models
 {
-    public class ItemAmenitie
+    public class ItemAmenities
     {
-        public int ID{ get; set; }
+        public long ID { get; set; }
+        public long ItemID { get; set; }
         public string Name{ get; set; }
         public string IconName{ get; set; }
     }

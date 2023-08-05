@@ -1,4 +1,4 @@
-﻿@page "/search"
+﻿@page "/"
 @using BlazorApp1.Data.Models;
 @using BlazorApp1.Data.Services;
 
@@ -12,7 +12,7 @@
             <div class="card border border-dark">
                 <div class="card-body">
                     <a href="/details/@propriedade.Id">
-                        <img height="150" width="150" />
+                        <img src="img/@propriedade.PictureFileName" height="150" width="150" />
                     </a>
                     <p>@propriedade.Title</p>
                     <div>
@@ -29,6 +29,7 @@
     [Inject]
     private ItemService itemService { get; set; }
 
+    
     IList<Items> ListaPropriedades;
     protected override Task OnInitializedAsync()
     {

@@ -1,32 +1,30 @@
 ﻿@page "/details/{Id}"
+@using BlazorApp1.Data.Models;
 @using BlazorApp1.Data.Services;
 @using OcMundial.Data.Models;
 
 <div class="row">
     <div class="col-12">
-        <p>Details of "Property title" at Seacho-gu</p>
+        <p>Details of @itemPrice.Title at Seacho-gu</p>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-4">
-        <img src="img/Sem título.png" class="img-fluid" />
-    </div>
-    <div class="col-4">
-        <img src="img/67818816.jpg" class="img-fluid" />
-    </div>
-    <div class="col-4">
-        <img src="img/67818817.jpg" class="img-fluid" />
-    </div>
+    @foreach (var item in itemPictures)
+    {
+        <div class="col-4">
+            <img src="img/@item.PictureFileName" class="img-fluid" />
+        </div>
+    }
 </div>
 
 <div class="row mt-5">
     <div class="col-4">
-        <p class="fs-6">Capacity: 2 Bedrooms: 1 Beds: 1 Bathrooms: 1</p>
+        <p class="fs-6">Capacity: @itemPrice.Capacity Bedrooms: @itemPrice.NumberOfBedrooms  Beds: @itemPrice.NumberOfBeds Bathrooms: @itemPrice.NumberOfBathrooms</p>
         <p class="fs-5 fw-bold">Description</p>
-        <p class="fs-6">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+        <p class="fs-6">@itemPrice.Description</p>
         <p class="fs-5 fw-bold">Host rules</p>
-        <p class="fs-6">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+        <p class="fs-6">@itemPrice.HostRules</p>
     </div>
     <div class="col-4 ">
         <p class="fw-bolder text-center">Available Amenities:</p>
@@ -46,9 +44,10 @@
         </div>
 
 
-        <p class="mt-5 text-end fw-bold">Payable Amount: 90 USD</p>
+        <p class="mt-5 text-end fw-bold">Payable Amount: @itemPrice.Price USD</p>
         <div class="text-end">
-            <button class="p-2">Reserve Now</button>
+            
+            <button onclick="GoPaginaReserva" class="p-2">Reserve Now</button>
         </div>
     </div>
 </div>
@@ -58,12 +57,22 @@
 
     [Inject]
     ItemService itemAmenitie { get; set; }
-    //public string Mensagem => $"O id é{Id}";
-    List<ItemAmenitie> listaAmenities;
+    List<ItemAmenities> listaAmenities;
+    ItemPrices itemPrice;
+    List<Items> items;
+
+    List<ItemPicture> itemPictures;
+
+    
+
     protected override Task OnInitializedAsync()
     {
         listaAmenities = itemAmenitie.GetItemsAmenities(int.Parse(Id));
-
+        itemPrice = itemAmenitie.GetItemPrice(int.Parse(Id));
+        items = itemAmenitie.GetItems();
+        itemPictures = itemAmenitie.GetItemPicture(int.Parse(Id));
+        int id = int.Parse(Id);
+        items = items.Where(x => x.Id == id).ToList();
         return base.OnInitializedAsync();
     }
 }

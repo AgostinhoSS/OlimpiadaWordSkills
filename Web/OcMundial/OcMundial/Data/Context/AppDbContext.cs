@@ -4,11 +4,15 @@ using OcMundial.Data.Models;
 
 namespace BlazorApp1.Data.Context
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<Items> Items { get; set; }
 
-        public DbSet<ItemAmenitie> ItemAmenitie { get; set; }
+        public DbSet<ItemPicture> ItemPictures { get; set; }
+
+        public DbSet<ItemAmenities> ItemAmenities { get; set; }
+
+        public DbSet<ItemPrices> ItemPrices { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
