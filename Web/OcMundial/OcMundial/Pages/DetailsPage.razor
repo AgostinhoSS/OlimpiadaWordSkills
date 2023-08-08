@@ -1,6 +1,8 @@
 ﻿@page "/details/{Id}"
+
 @using BlazorApp1.Data.Models;
 @using BlazorApp1.Data.Services;
+@using Newtonsoft.Json;
 @using OcMundial.Data.Models;
 
 <div class="row">
@@ -46,33 +48,96 @@
 
         <p class="mt-5 text-end fw-bold">Payable Amount: @itemPrice.Price USD</p>
         <div class="text-end">
-            
-            <button onclick="GoPaginaReserva" class="p-2">Reserve Now</button>
+
+            <button onclick="@GoPaginaPayment" class="p-2">Reserve Now</button>
+            <span>@Status</span>
         </div>
     </div>
 </div>
 @code {
-    [Parameter]
-    public string Id { get; set; }
+
+
+    [Parameter] public string Id { get; set; }
+    public string Status { get; set; }
+
+
 
     [Inject]
     ItemService itemAmenitie { get; set; }
+
+    [Inject]
+    NavigationManager Navigation { get; set; }
+
     List<ItemAmenities> listaAmenities;
     ItemPrices itemPrice;
     List<Items> items;
 
     List<ItemPicture> itemPictures;
 
-    
+    public async Task CarregarPayment()
+    {
+        try
+        {
+            Payment payment = new Payment();
+            payment.customer = "John Doe";
+            payment.price = 100.50;
+            payment.orderId = "1";
+            payment.extraInfo = "LOREM IPSUM";
+            payment.callBackUrl = "https://localhost:7134/details/19";
+            string json = JsonConvert.SerializeObject(payment);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var resultado = await client.PostAsync("http://localhost:5000/Payment/PaymentToken", content);
+            if (resultado.IsSuccessStatusCode)
+            {
+                string response = await resultado.Content.ReadAsStringAsync();
+                Navigation.NavigateTo("http://localhost:5000/Payment/" + response);
+            }
+        }
+        catch (Exception e)
+        {
+
+            throw;
+        }
+
+    }
+
+    public void GoPaginaPayment()
+    {
+
+        CarregarPayment();
+
+    }
 
     protected override Task OnInitializedAsync()
     {
-        listaAmenities = itemAmenitie.GetItemsAmenities(int.Parse(Id));
-        itemPrice = itemAmenitie.GetItemPrice(int.Parse(Id));
-        items = itemAmenitie.GetItems();
-        itemPictures = itemAmenitie.GetItemPicture(int.Parse(Id));
-        int id = int.Parse(Id);
-        items = items.Where(x => x.Id == id).ToList();
+        var uri = new Uri(Navigation.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        Status = query["status"];
+        if (string.IsNullOrEmpty(Status))
+        {
+            listaAmenities = itemAmenitie.GetItemsAmenities(int.Parse(Id));
+            itemPrice = itemAmenitie.GetItemPrice(int.Parse(Id));
+            items = itemAmenitie.GetItems();
+            itemPictures = itemAmenitie.GetItemPicture(int.Parse(Id));
+            int id = int.Parse(Id);
+            items = items.Where(x => x.Id == id).ToList();
+        }
+        else
+        {
+            if (Status == "success")
+            {
+                Navigation.NavigateTo("/success");
+            }
+            else
+            {
+                Navigation.NavigateTo("/Error");
+            }
+        }
+
+
+
+
         return base.OnInitializedAsync();
     }
 }

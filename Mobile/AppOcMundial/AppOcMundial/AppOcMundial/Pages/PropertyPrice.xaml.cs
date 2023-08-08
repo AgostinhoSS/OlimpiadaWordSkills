@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -16,6 +17,8 @@ namespace AppOcMundial.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PropertyPrice : ContentPage
     {
+        ObservableCollection<ItemLista> listaItems;
+
         public int ID { get; set; }
         public PropertyPrice(int id)
         {
@@ -39,18 +42,28 @@ namespace AppOcMundial.Pages
             json = client.GetStringAsync("http://10.140.4.104:8090/api/CancellationPolicies").Result;
             List<CancellationPolicie> policies = JsonConvert.DeserializeObject<List<CancellationPolicie>>(json);
 
+            
 
-            var lista = policies.Join(price, x => x.ID, y => y.CancellationPolicyID, (x, y) => new { x.Name, y.Price, y.Date.Date,y.ID }).ToList();
-            lvRules.ItemsSource = lista;
+            List<ItemLista> itemLista = policies.Join(price, x => x.ID, y => y.CancellationPolicyID, (x, y) => new ItemLista
+            {
+                Name = x.Name,
+                Price = y.Price,
+                Date = y.Date.Date,
+                ID = y.ID
+            }).ToList();
+
+            listaItems = new ObservableCollection<ItemLista>(itemLista);
+
+            lvRules.ItemsSource = listaItems;
         }
 
-        private void SwipeItem_Invoked(object sender, EventArgs e)
+        private void SwipeItem_Invoked(object sender, EventArgs e)//REMOVER
         {
-            string id = ((MenuItem)sender).CommandParameter.ToString();
-            DisplayAlert("Aviso", id, "Ok");
+            listaItems.RemoveAt(1);
+
         }
 
-        private void SwipeItem_Invoked_1(object sender, EventArgs e)
+        private void SwipeItem_Invoked_1(object sender, EventArgs e)//EDITAR
         {
             string id = ((MenuItem)sender).CommandParameter.ToString();
             DisplayAlert("Aviso", id, "Ok");
