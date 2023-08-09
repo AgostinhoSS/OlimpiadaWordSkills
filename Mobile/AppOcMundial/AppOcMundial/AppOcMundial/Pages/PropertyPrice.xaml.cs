@@ -24,6 +24,8 @@ namespace AppOcMundial.Pages
         {
             this.ID = id;
             InitializeComponent();
+            dtPickInicio.MinimumDate = DateTime.Now.AddDays(1);
+            dtPickFim.MinimumDate = DateTime.Now.AddDays(1);
             HttpClient client = new HttpClient();
 
             string json = client.GetStringAsync("http://10.140.4.104:8090/api/Items/" + ID).Result;
@@ -42,7 +44,7 @@ namespace AppOcMundial.Pages
             json = client.GetStringAsync("http://10.140.4.104:8090/api/CancellationPolicies").Result;
             List<CancellationPolicie> policies = JsonConvert.DeserializeObject<List<CancellationPolicie>>(json);
 
-            
+
 
             List<ItemLista> itemLista = policies.Join(price, x => x.ID, y => y.CancellationPolicyID, (x, y) => new ItemLista
             {
@@ -67,6 +69,30 @@ namespace AppOcMundial.Pages
         {
             string id = ((MenuItem)sender).CommandParameter.ToString();
             DisplayAlert("Aviso", id, "Ok");
+        }
+
+        private void dtPickFim_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            DateTime dateFim = (sender as DatePicker).Date;
+            DateTime dateInicio = dtPickInicio.Date;
+            if (dateFim < dateInicio)
+            {
+                dtPickFim.Date = dateInicio;
+            }
+            if (dtPickFim.Date >= DateTime.Now.Date.AddDays(90))
+            {
+                dtPickFim.Date = dateInicio;
+            }
+        }
+
+        private void dtPickInicio_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            DateTime dateInicio = (sender as DatePicker).Date;
+            DateTime dateFim = dtPickFim.Date;
+            if (dateInicio > dateFim)
+            {
+                dtPickInicio.Date = DateTime.Now.Date.AddDays(1);
+            }
         }
     }
 }

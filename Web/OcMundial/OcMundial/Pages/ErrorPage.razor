@@ -1,20 +1,36 @@
-﻿@page "/Error"
+﻿@page "/fail/{Token}"
+@using Newtonsoft.Json;
+@using OcMundial.Data.Models;
+
 
 <section class="row">
-    <div class="col-12">
+    <div class="col-12 text-center">
         <img class="img-fluid" src="/img/230-sad.png" />
     </div>
     <div class="col-12">
         <p class="text-center fs-3">Unfortunaly, your payment was not successful</p>
     </div>
     <div class="col-12">
-        <div class="border border-1 border-dark p-4">
-            <p>The reason for the transaction error:</p>
-            <p>xxxxxxxxxxxxxxxxxxx</p>
+        <div class="border border-1 border-dark pb-5">
+            <p class="m-3">The reason for the transaction error:</p>
+            <p class="text-center fw-bold fs-3">@status.status</p>
         </div>
     </div>
 </section>
 
 @code {
+    [Parameter]
+    public string Token { get; set; }
 
+    public PaymentStatus status;
+    
+    protected override void OnInitialized()
+    {
+        //consumir API para recuperar as informaçoes do pagamento
+        HttpClient client = new HttpClient();
+        string json = client.GetStringAsync("https://localhost:5001/Payment/VerifyPayment?trackId=" + Token).Result;
+        status = JsonConvert.DeserializeObject<PaymentStatus>(json);
+        
+        base.OnInitialized();
+    }
 }

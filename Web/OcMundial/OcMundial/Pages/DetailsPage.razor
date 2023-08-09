@@ -59,7 +59,7 @@
 
     [Parameter] public string Id { get; set; }
     public string Status { get; set; }
-
+    public string Token { get; set; }
 
 
     [Inject]
@@ -80,10 +80,11 @@
         {
             Payment payment = new Payment();
             payment.customer = "John Doe";
-            payment.price = 100.50;
-            payment.orderId = "1";
+            payment.price = Convert.ToDouble(itemPrice.Price);
+
+            payment.orderId = Id;
             payment.extraInfo = "LOREM IPSUM";
-            payment.callBackUrl = "https://localhost:7134/details/19";
+            payment.callBackUrl = "https://localhost:7134/details/" + Id;
             string json = JsonConvert.SerializeObject(payment);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
@@ -114,6 +115,7 @@
         var uri = new Uri(Navigation.Uri);
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
         Status = query["status"];
+
         if (string.IsNullOrEmpty(Status))
         {
             listaAmenities = itemAmenitie.GetItemsAmenities(int.Parse(Id));
@@ -125,13 +127,15 @@
         }
         else
         {
+            string Token;
+            Token = query["TrackId"];
             if (Status == "success")
             {
-                Navigation.NavigateTo("/success");
+                Navigation.NavigateTo("/success/" + Token);
             }
             else
             {
-                Navigation.NavigateTo("/Error");
+                Navigation.NavigateTo("/fail/" + Token);
             }
         }
 

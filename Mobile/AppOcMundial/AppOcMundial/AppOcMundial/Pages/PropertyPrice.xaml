@@ -8,7 +8,7 @@
                 <Label Margin="20,0" x:Name="lblTitulo" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" FontSize="20" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout HeightRequest="200">
-                <ListView x:Name="lvRules" ItemsSource="{Binding ItemLista}">
+                <ListView x:Name="lvRules" BindingContext="{Binding ListaItems}" ItemsSource="{Binding ListaItems}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -20,7 +20,7 @@
                                         <Label Text="{Binding Name,StringFormat='({0} Rules)'}" VerticalTextAlignment="Center" Padding="10,0"/>
                                     </StackLayout>
                                     <SwipeView.LeftItems>
-                                        <SwipeItem Text="Remove" BackgroundColor="Red" Clicked="SwipeItem_Invoked" Command="{Binding BindingContext.ExcluirItemCommand, Source={x:Reference lvRules}}" CommandParameter="{Binding .}"></SwipeItem>
+                                        <SwipeItem Text="Remove" BackgroundColor="Red" Invoked="SwipeItem_Invoked" ></SwipeItem>
                                     </SwipeView.LeftItems>
                                     <SwipeView.RightItems>
                                         <SwipeItem Text="Edit" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" CommandParameter="{Binding ID}"></SwipeItem>
@@ -47,11 +47,12 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Text="From:"/>
                         <Label Grid.Column="1" Grid.Row="0" Text="To:"/>
-                        <DatePicker Format="dd/MM/yyyy" Grid.Column="0" Grid.Row="1"/>
+                        <DatePicker Format="dd/MM/yyyy" Grid.Column="0" Grid.Row="1" x:Name="dtPickInicio" DateSelected="dtPickInicio_DateSelected"/>
                         <Image Grid.Column="0" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
-                        <DatePicker Format="dd/MM/yyyy" Grid.Column="1" Grid.Row="1"/>
+                        <DatePicker Format="dd/MM/yyyy" Grid.Column="1" Grid.Row="1" x:Name="dtPickFim" DateSelected="dtPickFim_DateSelected"/>
                         <Image Grid.Column="1" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
                     </Grid>
+                    
                     <Grid Margin="20" Padding="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
