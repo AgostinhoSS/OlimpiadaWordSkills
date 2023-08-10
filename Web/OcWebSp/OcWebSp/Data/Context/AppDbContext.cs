@@ -6,6 +6,7 @@ namespace OcWebSp.Data.Context
     public class AppDbContext : DbContext
     {
         public DbSet<Usuarios>Usuarios { get; set; }
+        public DbSet<Pessoas> Pessoas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
