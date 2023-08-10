@@ -1,0 +1,31 @@
+﻿@page "/login"
+@layout LoginLayout
+
+@using OcWebSp.Data.Models;
+
+
+<div class="form-control">
+    <EditForm Model="@usuario" OnSubmit="@SubmitLogin" class="p-5">
+        <div class="col-12 text-center m-4">
+            <img src="img/Logo.png" class="" style="width:800px" />
+        </div>
+        <div class="col-12 text-center my-4">
+            <InputText @bind-Value="usuario.Email" type="email" placeholder="E-mail" class="form-control" />
+        </div>
+        <div class="col-12 text-center my-4">
+            <InputText @bind-Value="usuario.Senha" type="password" placeholder="Senha" class="form-control" />
+        </div>
+        <div class="col-12 text-center my-4">
+            <button type="submit" class="btn fw-bold w-50" style="border-color:black">Entrar</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    Usuario usuario = new Usuario();
+    public void SubmitLogin()
+    {
+        //HttpClient client = new HttpClient();
+        //=client.
+    }
+}

@@ -47,12 +47,16 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Text="From:"/>
                         <Label Grid.Column="1" Grid.Row="0" Text="To:"/>
-                        <DatePicker Format="dd/MM/yyyy" Grid.Column="0" Grid.Row="1" x:Name="dtPickInicio" DateSelected="dtPickInicio_DateSelected"/>
-                        <Image Grid.Column="0" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
-                        <DatePicker Format="dd/MM/yyyy" Grid.Column="1" Grid.Row="1" x:Name="dtPickFim" DateSelected="dtPickFim_DateSelected"/>
-                        <Image Grid.Column="1" Grid.Row="1" Source="calendar.png" HorizontalOptions="End"/>
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                            <DatePicker Format="dd/MM/yyyy"  x:Name="dtPickInicio" DateSelected="dtPickInicio_DateSelected" HorizontalOptions="FillAndExpand"/>
+                            <Image  Source="calendar.png" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                            <DatePicker Format="dd/MM/yyyy"  x:Name="dtPickFim" DateSelected="dtPickFim_DateSelected" HorizontalOptions="FillAndExpand"/>
+                            <Image Source="calendar.png" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
                     </Grid>
-                    
+
                     <Grid Margin="20" Padding="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
