@@ -22,8 +22,8 @@
 </div>
 
 @code {
-    [Inject]
-    NavigationManager navigation { get; set; }
+    [Inject]NavigationManager navigation { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
 
     Usuario usuario = new Usuario();
 
@@ -32,7 +32,6 @@
         HttpClient client = new HttpClient();
         List<Usuarios> usuarioList = await client.GetFromJsonAsync<List<Usuarios>>("https://localhost:5001/api/Usuarios");
         List<Pessoas> pessoaList = await client.GetFromJsonAsync<List<Pessoas>>("https://localhost:5001/api/Pessoas");
-
         List<Usuario> LoginList = pessoaList.Join(usuarioList, x => x.Id, y => y.Id, (x, y) => new Usuario
             {
                 Email = x.Email,
@@ -40,6 +39,7 @@
             }).ToList<Usuario>();
 
         int teste = 0;
+        
         foreach (Usuario usu in LoginList)
         {
             if (usu.Email != usuario.Email && usu.Senha != usuario.Senha)
@@ -75,7 +75,9 @@
                 //Exibir mensagem de Senha incorreta
             }else
             {
-                navigation.NavigateTo("/");
+                
+                JSRuntime.InvokeVoidAsync("sessionStorage.setItem","","");
+                navigation.NavigateTo("/u?Id=1");
             }
         }
     }

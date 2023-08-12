@@ -61,8 +61,13 @@ namespace AppOcMundial.Pages
 
         private void SwipeItem_Invoked(object sender, EventArgs e)//REMOVER
         {
-            listaItems.RemoveAt(1);
-
+            ItemLista itemLista = (sender as SwipeItem).CommandParameter as ItemLista;
+            if (itemLista != null)
+            {
+                listaItems.Remove(itemLista);
+                HttpClient client = new HttpClient();
+                client.DeleteAsync("http://10.140.4.104:8090/api/ItemPrices/" + itemLista.ID);
+            }
         }
 
         private void SwipeItem_Invoked_1(object sender, EventArgs e)//EDITAR

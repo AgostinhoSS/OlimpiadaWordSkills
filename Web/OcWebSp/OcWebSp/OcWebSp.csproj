@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Avisos.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 

@@ -12,55 +12,55 @@ namespace OcWebSp.Data.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class AlunoController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public UsuariosController(AppDbContext context)
+        public AlunoController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Aluno
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuarios>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
         {
-          if (_context.Usuarios == null)
+          if (_context.Alunos == null)
           {
               return NotFound();
           }
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Alunos.ToListAsync();
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Aluno/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuarios>> GetUsuarios(int id)
+        public async Task<ActionResult<Aluno>> GetAluno(int id)
         {
-          if (_context.Usuarios == null)
+          if (_context.Alunos == null)
           {
               return NotFound();
           }
-            var usuarios = await _context.Usuarios.FindAsync(id);
+            var aluno = await _context.Alunos.FindAsync(id);
 
-            if (usuarios == null)
+            if (aluno == null)
             {
                 return NotFound();
             }
 
-            return usuarios;
+            return aluno;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Aluno/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuarios(int id, Usuarios usuarios)
+        public async Task<IActionResult> PutAluno(int id, Aluno aluno)
         {
-            if (id != usuarios.Id)
+            if (id != aluno.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuarios).State = EntityState.Modified;
+            _context.Entry(aluno).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace OcWebSp.Data.Controller
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuariosExists(id))
+                if (!AlunoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace OcWebSp.Data.Controller
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Aluno
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuarios>> PostUsuarios(Usuarios usuarios)
+        public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
         {
-          if (_context.Usuarios == null)
+          if (_context.Alunos == null)
           {
-              return Problem("Entity set 'AppDbContext.Usuarios'  is null.");
+              return Problem("Entity set 'AppDbContext.Aluno'  is null.");
           }
-            _context.Usuarios.Add(usuarios);
+            _context.Alunos.Add(aluno);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuarios", new { id = usuarios.Id }, usuarios);
+            return CreatedAtAction("GetAluno", new { id = aluno.Id }, aluno);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Aluno/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuarios(int id)
+        public async Task<IActionResult> DeleteAluno(int id)
         {
-            if (_context.Usuarios == null)
+            if (_context.Alunos == null)
             {
                 return NotFound();
             }
-            var usuarios = await _context.Usuarios.FindAsync(id);
-            if (usuarios == null)
+            var aluno = await _context.Alunos.FindAsync(id);
+            if (aluno == null)
             {
                 return NotFound();
             }
 
-            _context.Usuarios.Remove(usuarios);
+            _context.Alunos.Remove(aluno);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UsuariosExists(int id)
+        private bool AlunoExists(int id)
         {
-            return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

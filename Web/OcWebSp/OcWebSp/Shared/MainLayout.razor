@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Web;
+@inherits LayoutComponentBase
 
 <PageTitle>OcWebSp</PageTitle>
 
@@ -8,10 +9,8 @@
             <img src="img/Logo.png" class="" style="width:160px" />
             <div class="navbar-nav container-fluid">
                 
-                <NavLink class="nav-link mx-4" href="/">Home</NavLink>
-
-
-                <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
+                <NavLink class="nav-link mx-4" href="/">Home</NavLink>            
+                    <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
                 <button onclick="@BtnEntrar_Clicked" class="border-1 px-5 text-end bg-white">Entrar</button>
             </div>
         </nav>
@@ -23,10 +22,11 @@
 </div>
 
 @code{
-    [Inject]
-    NavigationManager NavigationManager{ get; set; }
+    [Inject] NavigationManager NavigationManager{ get; set; }
+    
     public void BtnEntrar_Clicked()
     {
+        
         NavigationManager.NavigateTo("/login");
     }
 }
