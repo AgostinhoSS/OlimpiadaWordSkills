@@ -222,21 +222,42 @@ namespace OcWebSp.Data.Controller
         }
 
         // GET: api/Login/5
-        [HttpGet("Usuarios123")]
-        public async Task<ActionResult<Usuarios>> GetLogin()
+        [HttpGet("Usuarios/{email}/{senha}")]
+        public async Task<ActionResult<Perfil>> GetLogin(string email, string senha)
         {
-            var retorno = new
+            var usuarios = await _context.Usuarios.Where(x => x.Senha == senha).FirstOrDefaultAsync();
+            var pessoas = await _context.Pessoas.Where(x => x.Email == email).FirstOrDefaultAsync();
+            int idUsu = usuarios.Id;
+            var alunos = await _context.Alunos.Where(x => x.Id == idUsu).FirstOrDefaultAsync<Aluno>();
+            var docentes = await _context.Docentes.Where(x => x.Id == idUsu).FirstOrDefaultAsync<Docentes>();
+            Perfil perfil;
+            if (usuarios.Id == pessoas.Id)
             {
-                Nome = "xabrau",
-                Idade = 10,
-            };
-            return Ok(retorno);
-            //var usuarios = await _context.Usuarios.Where(x => x.Senha == senha).FirstOrDefaultAsync();
-            //var pessoas = await _context.Pessoas.Where(x => x.Email == email).FirstOrDefaultAsync();
-            
+                if (alunos != null)
+                {
+                    perfil = new Perfil()
+                    {
+                        Id = idUsu,
+                        Name = pessoas.Nome,
+                        Tipo = "Aluno",
+                    };
 
-
-            //return usuarios;
+                }
+                else
+                {
+                    perfil = new Perfil()
+                    {
+                        Id = idUsu,
+                        Name = pessoas.Nome,
+                        Tipo = "Docente",
+                    };
+                }
+            }
+            else
+            {
+                return null;
+            }
+            return perfil;
         }
     }
 }

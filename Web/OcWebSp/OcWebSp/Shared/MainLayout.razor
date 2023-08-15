@@ -1,32 +1,60 @@
 ﻿@using System.Web;
+@using OcWebSp.Pages.Components
 @inherits LayoutComponentBase
 
 <PageTitle>OcWebSp</PageTitle>
+@if (1 == 1)
+{
+    <div class="page">
+        <main>
+            <nav class="px-4 border-1 navbar navbar-expand-lg navbar-light " style="border-width:1px;border:solid">
+                <img src="img/Logo.png" class="" style="width:160px" />
+                <div class=" navbar-nav container-fluid">
 
-<div class="page">
-    <main>
-        <nav class="px-4 border-1 navbar navbar-expand-lg navbar-light " style="border-width:1px;border:solid">
-            <img src="img/Logo.png" class="" style="width:160px" />
-            <div class="navbar-nav container-fluid">
-                
-                <NavLink class="nav-link mx-4" href="/">Home</NavLink>            
-                    <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
-                <button onclick="@BtnEntrar_Clicked" class="border-1 px-5 text-end bg-white">Entrar</button>
-            </div>
-        </nav>
+                    
+                        <NavLink class="nav-link mx-4" href="/">Home</NavLink>
+                        <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
 
-        <article>
-            @Body
-        </article>
-    </main>
-</div>
+                        @if (string.IsNullOrEmpty(id))
+                        {
+                            <button onclick="@BtnEntrar_Clicked" class="border-1 px-5 text-end bg-white">Entrar</button>
+                        }
+                        else
+                        {
+                            <MenuLogado></MenuLogado>
+                        }
 
-@code{
-    [Inject] NavigationManager NavigationManager{ get; set; }
-    
+
+
+
+                   
+                </div>
+            </nav>
+
+            <article>
+                @Body
+            </article>
+        </main>
+    </div>
+}
+
+@code {
+    [Inject] NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    IJSRuntime Runtime { get; set; }
+
+    public string id;
+
+
     public void BtnEntrar_Clicked()
     {
-        
+
         NavigationManager.NavigateTo("/login");
+    }
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        id = await Runtime.InvokeAsync<string>("sessionStorage.getItem", "ID");
+        StateHasChanged();
     }
 }

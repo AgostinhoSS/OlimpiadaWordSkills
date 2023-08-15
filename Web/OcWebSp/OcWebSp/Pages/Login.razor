@@ -22,7 +22,7 @@
 </div>
 
 @code {
-    [Inject]NavigationManager navigation { get; set; }
+    [Inject] NavigationManager navigation { get; set; }
     [Inject] IJSRuntime JSRuntime { get; set; }
 
     Usuario usuario = new Usuario();
@@ -30,8 +30,8 @@
     public async void SubmitLogin()
     {
         HttpClient client = new HttpClient();
-        List<Usuarios> usuarioList = await client.GetFromJsonAsync<List<Usuarios>>("https://localhost:5001/api/Usuarios");
-        List<Pessoas> pessoaList = await client.GetFromJsonAsync<List<Pessoas>>("https://localhost:5001/api/Pessoas");
+        List<Usuarios> usuarioList = await client.GetFromJsonAsync<List<Usuarios>>("https://localhost:7013/api/Usuarios");
+        List<Pessoas> pessoaList = await client.GetFromJsonAsync<List<Pessoas>>("https://localhost:7013/api/Pessoas");
         List<Usuario> LoginList = pessoaList.Join(usuarioList, x => x.Id, y => y.Id, (x, y) => new Usuario
             {
                 Email = x.Email,
@@ -39,7 +39,7 @@
             }).ToList<Usuario>();
 
         int teste = 0;
-        
+
         foreach (Usuario usu in LoginList)
         {
             if (usu.Email != usuario.Email && usu.Senha != usuario.Senha)
@@ -68,16 +68,24 @@
         if (teste == -1)
         {
             //Exibir mensagem de login incorreto
-        }else
+        }
+        else
         {
             if (teste == -2)
             {
                 //Exibir mensagem de Senha incorreta
-            }else
+            }
+            else
             {
-                
-                JSRuntime.InvokeVoidAsync("sessionStorage.setItem","","");
-                navigation.NavigateTo("/u?Id=1");
+                string email = usuario.Email;
+                string senha = usuario.Senha;
+                string uri = "https://localhost:7013/api/Usuarios/" + email + "/" + senha;
+                //string uri = "Usuarios/" + email + "/" + senha;
+                Perfil perfil = await client.GetFromJsonAsync<Perfil>(uri);
+                JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "ID", perfil.Id);
+                JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "Name", perfil.Name);
+                JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "Tipo", perfil.Tipo);
+                navigation.NavigateTo("/");
             }
         }
     }
