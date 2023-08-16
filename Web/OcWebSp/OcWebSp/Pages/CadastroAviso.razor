@@ -1,74 +1,144 @@
 ﻿@page "/cadastroAviso"
+@using Newtonsoft.Json;
+@using OcWebSp.Data.Models;
 
 <h3 class="my-2">Cadastro de Avisos</h3>
 <div class="row">
-    <div class="col-12">
-        <div class="row">
-            <div class="col-2">
-                <label>Data:</label>
-            </div>
-            <div class="col-4">
-                <input class="form-control" type="date" />
-            </div>
-        </div>
-    </div>
-    <div class="col-12 my-4">
-        <div class="row">
-            <div class="col-2">
-                <label>Titulo:</label>
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="text" />
-            </div>
-        </div>
-    </div>
-    <div class="col-12 ">
-        <div class="row align-items-start">
-            <div class="col-2 align-items-center">
-                <label>Texto Aviso:</label>
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="text" style="height:200px" />
-            </div>
-            <div class="col-2">
-                <label>Imagem:</label>
-                <img src="@imagemSelecionada" class="img-fluid" />
-            </div>
-        </div>
-
-    </div>
-    <div class="col-12 my-4">
-        <div class="row align-items-center">
-            <div class="col-2">
-                <label>Tipo:</label>
-            </div>
-            <div class="col-8">
-                <div class="form-control d-flex justify-content-evenly" style="height:100%">
-                    <div>
-                        <input name="tipo" id="geral" class="form-check-input" type="radio" />
-                        <label for="geral">Geral</label>
-                    </div>
-                    <div>
-                        <input name="tipo" id="curso" class="form-check-input" type="radio" />
-                        <label for="curso">Por Curso</label>
-                    </div>
-                    <div>
-                        <input name="tipo" id="turma" class="form-check-input" type="radio" />
-                        <label for="turma">Por Turma</label>
-                    </div>
+    <EditForm Model="@cadastroAvisoForm" OnSubmit="@SubmitCadastroAviso">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <label>Data:</label>
+                </div>
+                <div class="col-4">
+                    <input @bind-value="cadastroAvisoForm.Data" class="form-control" type="date" />
                 </div>
             </div>
-            <div class="col-2">
-                <InputFile OnChange="GetFileImage" class="btn btn-primary w-100">Upload Imagem</InputFile>
-
-                <button class="btn btn-success w-100 mt-2">Salvar</button>
+        </div>
+        <div class="col-12 my-4">
+            <div class="row">
+                <div class="col-2">
+                    <label>Titulo:</label>
+                </div>
+                <div class="col-8">
+                    <input @bind-value="cadastroAvisoForm.Titulo" class="form-control" type="text" />
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col-12 ">
+            <div class="row align-items-start">
+                <div class="col-2 align-items-center">
+                    <label>Texto Aviso:</label>
+                </div>
+                <div class="col-8">
+                    <input @bind-value="cadastroAvisoForm.TextoAviso" class="form-control" type="text" style="height:200px" />
+                </div>
+                <div class="col-2">
+                    <label>Imagem:</label>
+                    <img src="imagemSelecionada" class="img-fluid" />
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 my-4">
+            <div class="row align-items-center">
+                <div class="col-2">
+                    <label>Tipo:</label>
+                    @if (cadastroAvisoForm.Tipo== TipoAviso.Curso)
+                    {
+                        <label>Por Curso:</label>
+                    }
+                </div>
+                <div class="col-8">
+                    <div class="form-control d-flex justify-content-evenly" style="height:100%">
+                        <InputRadioGroup Name="tipo" @bind-Value="cadastroAvisoForm.Tipo">
+                            <div>
+                                <InputRadio Value="TipoAviso.Geral">Geral</InputRadio>                                                             
+                            </div>
+                            <div>
+                                <InputRadio Value="TipoAviso.Curso">Por Curso</InputRadio>
+                            </div>
+                            <div>
+                                <InputRadio Value="TipoAviso.Turma">Por Turma</InputRadio>
+                            </div>
+                        </InputRadioGroup>
+                        @if(cadastroAvisoForm.Tipo == TipoAviso.Turma)
+                        {
+                            <p>ée turma</p>
+                        }
+                        @if(cadastroAvisoForm.Tipo == TipoAviso.Curso)
+                        {
+                            <p>ée Curso</p>
+                        }
+                        @if (cadastroAvisoForm.Tipo == TipoAviso.Geral)
+                        {
+                            <p>ée Geral</p>
+                        }
+                    </div>
+                </div>
+                <div class="col-2">
+                    <InputFile OnChange="GetFileImage" class="btn btn-primary w-100">Upload Imagem</InputFile>
+
+                    <button type="submit" class="btn btn-success w-100 mt-2">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
 </div>
 
 @code {
     public string imagemSelecionada;
+    private DateTime dataAviso = DateTime.Now;
+
+    CadastroAvisoForm cadastroAvisoForm = new CadastroAvisoForm { Data = DateTime.Now };
+
+    private void TiposChecked()
+    {
+        StateHasChanged();
+    }
+
+    private async void SubmitCadastroAviso()
+    {
+        if (cadastroAvisoForm.Data.Date < DateTime.Now.Date)
+        {
+            cadastroAvisoForm.Data = DateTime.Now;
+            StateHasChanged();
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(cadastroAvisoForm.Titulo))
+            {
+                //exibir aviso de campo incorreto
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(cadastroAvisoForm.TextoAviso))
+                {
+                    //exibir aviso de campo incorreto
+                }
+                else
+                {
+                   
+                        HttpClient client = new HttpClient();
+                        Avisos avisos = new Avisos
+                            {
+                                Data = cadastroAvisoForm.Data,
+                                Titulo = cadastroAvisoForm.Titulo,
+                                Aviso = cadastroAvisoForm.TextoAviso,
+                                IdCurso = null,
+                                IdTurma = null,
+                                Imagem = cadastroAvisoForm.Image
+                            };
+                        string json = JsonConvert.SerializeObject(cadastroAvisoForm);
+                        StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                        var retorno = await client.PostAsync("https://localhost:7013/api/avisos", content);
+                        //Salva Aviso
+                    
+                }
+            }
+        }
+    }
+
     private async Task GetFileImage(InputFileChangeEventArgs e)
     {
         var file = e.File;
@@ -81,14 +151,13 @@
         var bytes = memoryStream.ToArray();
         var base64 = Convert.ToBase64String(bytes);
         imagemSelecionada = $"data:{file.ContentType};base64,{base64}";
+        cadastroAvisoForm.Image = $"data:{file.ContentType};base64,{base64}";
         StateHasChanged();
-
-
-
-
         //if (file != null)
         //{
         //    var base64 = Convert.ToBase64String(file);
         //}
     }
+
+   
 }
