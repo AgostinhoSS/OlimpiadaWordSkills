@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial2.MainPage">
+
+    <StackLayout Spacing="0">
+        <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="Seoul Stay Addon Services" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label Margin="10" Text="Enter username/password"/>
+                <Frame Margin="10" VerticalOptions="StartAndExpand" BorderColor="Black">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                        <Label Text="Username:"/>
+                        <Entry Text="sonia1980" x:Name="txtUsername"/>
+                        <Label Text="Password:"/>
+                        <Entry Text="1980" x:Name="txtPasword" IsPassword="True"/>
+                        <Button VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Text="Login" FontSize="15" Clicked="Button_Clicked"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

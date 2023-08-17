@@ -5,7 +5,8 @@ namespace OcWebSp.Data.Context
 {
     public class AppDbContext : DbContext
     {
-        
+        public DbSet<Cursos> Cursos { get; set; }
+        public DbSet<Turmas> Turmas { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Pessoas> Pessoas { get; set; }

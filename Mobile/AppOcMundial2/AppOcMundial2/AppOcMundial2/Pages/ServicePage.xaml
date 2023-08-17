@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial2.Pages.ServicePage"
+             Title="qwdnqwnqwjn"
+             >
+           
+
+    <ContentPage.Content>
+        <StackLayout Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="Seoul Stay - Services Menu" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+            </StackLayout>
+            <StackLayout Margin="20,0">
+                <Label x:Name="txtUsername" Text="{Binding Username,StringFormat='Welcome {0}'}"/>
+                <Label Text="Please choose a category:"/>
+            </StackLayout>
+            <ListView CachingStrategy="RecycleElement" Margin="0,20" HasUnevenRows="True" x:Name="ListaServices" ItemsSource="{Binding ServiceTypes}" ItemSelected="ListaServices_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell BindingContext="{Binding .}">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Margin="20,5" Source="{Binding IconName}"/>
+                                <Label VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="25" Text="{Binding Name}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

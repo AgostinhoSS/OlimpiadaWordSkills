@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:Pages="clr-namespace:AppOcMundial2.Pages"
+            x:Class="AppOcMundial2.Pages.TabPages"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"           
+            SelectedTabColor="Black"
+            UnselectedTabColor="Gray">
+    <!--Pages can be added as references or inline-->
+    <Pages:ServicePage Title="Services" />
+    <Pages:CartPage Title="Cart"/>
+    <Pages:AboutPage Title="About"/>
+</TabbedPage>

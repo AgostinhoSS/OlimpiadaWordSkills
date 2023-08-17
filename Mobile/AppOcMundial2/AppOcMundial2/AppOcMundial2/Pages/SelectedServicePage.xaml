@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcMundial2.Pages.SelectedServicePage">
+    <ContentPage.Content>
+        <StackLayout Spacing="0" Padding="0">
+            <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="{Binding Name,StringFormat='Seoul Stay - {0}'}" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+            </StackLayout>
+            <StackLayout>
+                <Label FontSize="15" Text="{Binding Description}"/>
+                <ListView BackgroundColor="Blue">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding IconName}"/>
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding Price,StringFormat='${0}'}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="{Binding Name,StringFormat='Description of {0}'}"/>
+                <ScrollView BackgroundColor="Red" HeightRequest="130">
+                    <Label Text="{Binding Description}"/>
+                </ScrollView>
+            </StackLayout>
+            <StackLayout>
+                <Grid>
+                    <Label Text="Date:" Grid.Column="0" Grid.Row="0"/>
+                    <DatePicker Grid.Column="1" Grid.Row="0"/>
+                    <Image Grid.Column="2" Grid.Row="0"/>
+                    <Label Grid.Column="3" Grid.Row="0"/>
+                    <Label Grid.Column="0" Grid.Row="0"/>
+                    <Picker Grid.Column="0" Grid.Row="0"/>
+                    <Label Grid.Column="0" Grid.Row="0"/>
+                    <Label Grid.Column="0" Grid.Row="0"/>
+                    <Entry Grid.Column="0" Grid.Row="0"/>
+                    <Label Grid.Column="0" Grid.Row="0"/>
+                    <Label Grid.Column="0" Grid.Row="0"/>
+                    <Button Text="Add to cart" Grid.Column="0" Grid.Row="0"/>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -29,6 +29,9 @@ namespace OcWebSp.Data.Controller
             {
                 return NotFound();
             }
+
+            
+
             return await _context.Pessoas.ToListAsync();
         }
 
