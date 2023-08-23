@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-2">
                     <label>Imagem:</label>
-                    <img src="imagemSelecionada" class="img-fluid" />
+                    <img src="@imagemSelecionada" class="img-fluid" />
                 </div>
             </div>
 
@@ -49,13 +49,16 @@
                     <div class="form-control d-flex justify-content-evenly" style="height:100%">
                         <InputRadioGroup Name="tipo" @bind-Value="cadastroAvisoForm.Tipo">
                             <div>
-                                <InputRadio Value="TipoAviso.Geral">Geral</InputRadio>
+                                <InputRadio Value="TipoAviso.Geral" />
+                                Geral
                             </div>
                             <div>
-                                <InputRadio Value="TipoAviso.Curso">Por Curso</InputRadio>
+                                <InputRadio Value="TipoAviso.Curso" />
+                                Por Curso
                             </div>
                             <div>
-                                <InputRadio Value="TipoAviso.Turma">Por Turma</InputRadio>
+                                <InputRadio Value="TipoAviso.Turma" />
+                                Por Turma
                             </div>
                         </InputRadioGroup>
                     </div>
@@ -75,9 +78,10 @@
                         </div>
                         <div class="col-8">
                             <select class="form-select" @bind="cadastroAvisoForm.IdCurso">
+                                <option value="" selected></option>
                                 @foreach (var curso in listaCursos)
                                 {
-                                    <option class="form-control" value="@curso.Id" selected>@curso.Nome</option>
+                                    <option class="form-control" value="@curso.Id">@curso.Nome</option>
                                 }
                             </select>
                         </div>
@@ -89,9 +93,10 @@
                         </div>
                         <div class="col-8">
                             <select class="form-select" @bind="cadastroAvisoForm.IdTurma">
+                                <option value="" selected></option>
                                 @foreach (var turma in listaTurmas)
                                 {
-                                    <option value="@turma.Id" selected>@turma.CodTurma</option>
+                                    <option value="@turma.Id">@turma.CodTurma</option>
                                 }
                             </select>
                         </div>
@@ -106,9 +111,10 @@
                         </div>
                         <div class="col-8">
                             <select class="form-select" @bind="cadastroAvisoForm.IdCurso">
+                                <option value="" selected></option>
                                 @foreach (var curso in listaCursos)
                                 {
-                                    <option class="form-control" value="@curso.Id" selected="@curso.Id == 4">@curso.Nome</option>
+                                    <option class="form-control" value="@curso.Id">@curso.Nome</option>
                                 }
                             </select>
                         </div>

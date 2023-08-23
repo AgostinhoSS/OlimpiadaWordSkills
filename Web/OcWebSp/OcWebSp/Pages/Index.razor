@@ -1,23 +1,52 @@
 ﻿@page "/"
+@using Newtonsoft.Json;
+@using OcWebSp.Data.Models;
 
 <PageTitle>Index</PageTitle>
 
 <h3>Avisos</h3>
 
-<SlickCarousel Id="myCarousel" Class="my-carousel">
-
-    <div class="carousel-item">
-        <img src="img/download.jpg" alt="Slider Image" />
-        <div class="carousel-text">
-            <h3>Aviso 1</h3>
-            <p>qwdqwdqwdqwqdfqwdqwdqwffqwdqwqwqwfqfqwfq</p>
-        </div>
+<div id="carouselExample" class="border border-1 border-dark carousel slide m-3">
+    <div class="carousel-inner">
+        @foreach (var item in listaAvisos)
+        {
+            <div class="carousel-item p-5 @(item == listaAvisos.First() ? "active" : "")">
+                <div class="row">
+                    <div class="col-6 d-sm-block d-none">
+                        <img src="img/download.jpg" class="img-fluid d-block w-100" alt="..." />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <p>Data Aviso @item.Data</p>
+                        <p>@item.Titulo</p>
+                        <span>@item.Aviso</span>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-
-</SlickCarousel>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
 @code
 {
     [Parameter]
     public string Id { get; set; }
+
+    List<Avisos> listaAvisos = new List<Avisos>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        HttpClient client = new HttpClient();
+        var list = await client.GetFromJsonAsync<List<Avisos>>("https://localhost:7013/api/Avisos");
+        listaAvisos = list.OrderBy(x => x.Data).ToList();
+        base.OnInitialized();
+    }
 }

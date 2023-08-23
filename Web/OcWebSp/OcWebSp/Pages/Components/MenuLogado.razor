@@ -21,7 +21,9 @@
                     <button onclick="@BtnSair_Clicked" class=" btn btn-danger px-4">Sair</button>
                 </div>
                 <div class="col-12 text-center">
-                    <p>01:20:00</p>
+                    <p>
+                        @tempo
+                    </p>
                 </div>
             </div>
         </div>
@@ -34,7 +36,25 @@
     [Inject] IJSRuntime Runtime { get; set; }
     [Inject] NavigationManager Navigation { get; set; }
 
-    public string id, name, tipo;
+    private int tempoDecorrido = 0;
+    private Timer timer;
+
+    public string id, name, tipo, tempo;
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(AtualizarTempo, null, 1000, 1000);
+    }
+
+    private void AtualizarTempo(object state)
+    {
+        tempoDecorrido++;
+        TimeSpan timeSpan = TimeSpan.FromSeconds(tempoDecorrido);
+        tempo = $"{timeSpan.Hours:D2}:{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
+        InvokeAsync(StateHasChanged);
+    }
+
+
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
