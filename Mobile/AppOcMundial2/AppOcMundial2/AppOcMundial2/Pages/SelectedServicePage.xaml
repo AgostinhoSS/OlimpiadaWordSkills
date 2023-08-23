@@ -5,45 +5,53 @@
     <ContentPage.Content>
         <StackLayout Spacing="0" Padding="0">
             <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
-                <Label Text="{Binding Name,StringFormat='Seoul Stay - {0}'}" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+                <Label x:Name="txtTitle" Text="{Binding Name,StringFormat='Seoul Stay - {0}'}" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
             </StackLayout>
-            <StackLayout>
-                <Label FontSize="15" Text="{Binding Description}"/>
-                <ListView BackgroundColor="Blue">
+            <StackLayout Margin="0,0">
+                <Label Margin="10,0" x:Name="txtDescricao" FontSize="15" Text="{Binding Description}"/>
+                <Line HeightRequest="1" BackgroundColor="Black"/>
+                <ListView CachingStrategy="RecycleElement" x:Name="lvServices" HeightRequest="1400" ItemsSource="{Binding ListaServices}" ItemSelected="lvServices_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell BindingContext="{Binding .}">
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="{Binding IconName}"/>
-                                    <Label Text="{Binding Name}"/>
-                                    <Label Text="{Binding Price,StringFormat='${0}'}"/>
+                                    <Label HorizontalOptions="Center" Text="{Binding Name}" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding Price,StringFormat='${0}'}" VerticalTextAlignment="Center"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <StackLayout>
-                <Label Text="{Binding Name,StringFormat='Description of {0}'}"/>
-                <ScrollView BackgroundColor="Red" HeightRequest="130">
-                    <Label Text="{Binding Description}"/>
+            <Line HeightRequest="1" BackgroundColor="Black"/>
+            <StackLayout Margin="10,0">
+                <Label FontAttributes="Bold" x:Name="txtServiceName" Text="{Binding Name,StringFormat='Description of {0}'}"/>
+                <ScrollView HeightRequest="130">
+                    <Label x:Name="txtServiceDesc" Text="{Binding Description}"/>
                 </ScrollView>
             </StackLayout>
-            <StackLayout>
-                <Grid>
-                    <Label Text="Date:" Grid.Column="0" Grid.Row="0"/>
-                    <DatePicker Grid.Column="1" Grid.Row="0"/>
-                    <Image Grid.Column="2" Grid.Row="0"/>
-                    <Label Grid.Column="3" Grid.Row="0"/>
-                    <Label Grid.Column="0" Grid.Row="0"/>
-                    <Picker Grid.Column="0" Grid.Row="0"/>
-                    <Label Grid.Column="0" Grid.Row="0"/>
-                    <Label Grid.Column="0" Grid.Row="0"/>
-                    <Entry Grid.Column="0" Grid.Row="0"/>
-                    <Label Grid.Column="0" Grid.Row="0"/>
-                    <Label Grid.Column="0" Grid.Row="0"/>
-                    <Button Text="Add to cart" Grid.Column="0" Grid.Row="0"/>
-                </Grid>
+            <Line HeightRequest="1" BackgroundColor="Black"/>
+            <StackLayout x:Name="slSetPrice" Margin="10" IsVisible="False">
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalTextAlignment="Center" Text="Date:"/>
+                    <DatePicker />
+                    <Image Source="calendar.png" WidthRequest="30" VerticalOptions="Center"/>
+                    <Label HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" Text="Remaining:"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalTextAlignment="Center" Text="Number of people"/>
+                    <Picker HorizontalOptions="FillAndExpand"/>
+                    <Label VerticalTextAlignment="Center" Text="in 5 bookings"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalTextAlignment="Center" Text="Additional notes:"/>
+                    <Entry HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" Text="Amount payable:$400,00"/>
+                    <Button Text="Add to cart" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

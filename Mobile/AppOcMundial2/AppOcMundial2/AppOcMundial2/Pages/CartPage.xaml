@@ -4,9 +4,46 @@
              x:Class="AppOcMundial2.Pages.CartPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Cart Page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label x:Name="txtTitle" Text="Seoul Stay - Cart Checkout" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+            </StackLayout>
+            <StackLayout Margin="10,0">
+                <Frame BorderColor="Black">
+                    <ListView HeightRequest="350">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image/>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label/>
+                                            <Label/>
+                                            <Label/>
+                                        </StackLayout>
+                                        <Button/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
+            <StackLayout Margin="20,0" Spacing="0" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                    <Label FontSize="18" VerticalTextAlignment="Center" Text="Enter Coupon Code:"/>
+                    <Entry HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Submit"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="15" VerticalTextAlignment="Center" Text="Coupon Successfully Applied!" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,20">
+                    <Label FontSize="18" VerticalTextAlignment="Center" Text="Total amount payable (3Items): $180,00"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  VerticalOptions="EndAndExpand">
+                    <Button Text="Proceed to Checkout" HorizontalOptions="EndAndExpand"/>
+                </StackLayout >
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

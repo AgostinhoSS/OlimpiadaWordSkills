@@ -23,7 +23,7 @@ namespace AppOcMundial2.Pages
             InitializeComponent();
             txtUsername.BindingContext = usuarioLogado;
             HttpClient client = new HttpClient();
-            string json = client.GetStringAsync("http://172.20.192.1:8092/api/ServiceTypes").Result;
+            string json = client.GetStringAsync("http://172.24.80.1:8095/api/ServiceTypes").Result;
             List<ServiceType> listaServices = JsonConvert.DeserializeObject<List<ServiceType>>(json);
             Services = new ObservableCollection<ServiceType>(listaServices);
             ListaServices.ItemsSource = Services;

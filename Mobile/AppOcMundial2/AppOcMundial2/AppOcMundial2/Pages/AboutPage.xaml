@@ -4,9 +4,16 @@
              x:Class="AppOcMundial2.Pages.AboutPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="About!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label x:Name="txtTitle" Text="Seoul Stay - About Us" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout Margin="20,50">
+                    <Image Source="logo.png"/>
+                </StackLayout>
+                <Label FontAttributes="Bold" FontSize="25" Text="Seoul Stay Addon Services" HorizontalTextAlignment="Center"/>
+                <Label FontAttributes="Bold" Text="V.1.0" HorizontalTextAlignment="Center"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

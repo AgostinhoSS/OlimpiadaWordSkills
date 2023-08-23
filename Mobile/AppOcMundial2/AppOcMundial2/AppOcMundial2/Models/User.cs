@@ -22,7 +22,7 @@ namespace AppOcMundial2.Models
         public static async Task<List<User>> GetUsersList()
         {
             HttpClient client = new HttpClient();
-            string json = await client.GetStringAsync("http://172.20.192.1:8092/api/Users");
+            string json = await client.GetStringAsync("http://172.24.80.1:8095/api/Users");
             List<User> users = JsonConvert.DeserializeObject<List<User>>(json);
             return users;
         }

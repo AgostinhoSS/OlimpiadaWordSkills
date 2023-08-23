@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AppOcMundial2.Models
 {
-    class Services
+    public class Services
     {
         public long ID { get; set; }
         public string GUID { get; set; }
