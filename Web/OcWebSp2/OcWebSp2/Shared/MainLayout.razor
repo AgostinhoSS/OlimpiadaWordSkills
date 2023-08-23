@@ -1,0 +1,47 @@
+﻿@using OcWebSp2.Components
+@inherits LayoutComponentBase
+
+<div class="page">
+
+
+
+    <main>
+        @if (string.IsNullOrEmpty(id))
+        {
+            <nav class=" border border-dark p-3 navbar navbar-expand navbar-light">
+                <div class="navbar-nav  container-fluid">
+                    <img src="img/Logo.png" class="" style="width:160px" />
+                    <NavLink class="nav-link" href="/">Home</NavLink>
+                    <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
+                    <button onclick="@BtnLogin_Clicked" class="px-3 btn btn-success">Entrar</button>
+
+                </div>
+            </nav>
+        }
+        else
+        {
+            <MenuLogado></MenuLogado>
+        }
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+    [Inject] IJSRuntime runtime { get; set; }
+    [Inject] NavigationManager Navigation { get; set; }
+
+    string id;
+    private void BtnLogin_Clicked()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        id = await runtime.InvokeAsync<string>("sessionStorage.getItem", "Id");
+    }
+}

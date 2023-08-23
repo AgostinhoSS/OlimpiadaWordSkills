@@ -1,0 +1,53 @@
+﻿@page "/login"
+@using BlazorApp1.Data.Models;
+@layout LoginLayout
+
+
+<div class="m-5 h-100 px-4 align-middle">
+    <div class="row">
+        <div class="col-12">
+            <img src="img/Logo.png" class="img-fluid" />
+        </div>
+    </div>
+    <EditForm Model="@loginForm" OnSubmit="SubmitLogin">
+        <div class="row">
+            <div class="mt-5 col-12">
+                <InputText class="form-control" @bind-Value=loginForm.Email type="email"></InputText>
+            </div>
+            <div class="my-4 col-12">
+                <InputText class="form-control" @bind-Value=loginForm.Senha type="password"></InputText>
+            </div>
+            <div class="my-2 col-12 text-center">
+                <button type="submit" class="w-25 btn btn-success">Entrar</button>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+
+@code {
+    [Inject] IJSRuntime runtime { get; set; }
+    [Inject] NavigationManager navigation { get; set; }
+    LoginFormModel loginForm = new LoginFormModel();
+
+    private async void SubmitLogin()
+    {
+        HttpClient client = new HttpClient();
+        string uri = "https://localhost:5001/api/login/" + loginForm.Email+ "/" + loginForm.Senha;
+        Perfil perfil = await client.GetFromJsonAsync<Perfil>(uri);
+        if (perfil.Mensagem == "")
+        {
+            //perfil.Mensagem;
+            //exibir mensagem de erro
+        }
+        else
+        {
+            runtime.InvokeVoidAsync("sessionStorage.setItem", "Id", perfil.Id);
+            runtime.InvokeVoidAsync("sessionStorage.setItem", "Name", perfil.Name);
+            runtime.InvokeVoidAsync("sessionStorage.setItem", "Tipo", perfil.Tipo);
+            navigation.NavigateTo("/");
+        }
+
+
+    }
+}

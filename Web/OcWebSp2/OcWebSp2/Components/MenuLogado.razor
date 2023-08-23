@@ -1,0 +1,39 @@
+﻿@using BlazorApp1.Data.Models;
+<nav class=" border border-dark p-3 navbar navbar-expand navbar-light">
+    <div class="navbar-nav  container-fluid">
+        <img src="img/Logo.png" class="" style="width:160px" />
+        <NavLink class="nav-link" href="/">Home</NavLink>
+        <NavLink class="nav-link" href="/cursos">Cursos</NavLink>
+        @if (perfil.Tipo == "Docente")
+        {
+            <NavLink class="nav-link" href="/avisos">Avisos</NavLink>
+        }
+        <div>
+        <p>@perfil.Name</p>
+        <p>@perfil.Tipo</p>
+        </div>
+        <button onclick="" class="px-3 btn btn-success">Sair</button>
+        <p>01:20:00</p>
+    </div>
+</nav>
+
+@code {
+    [Inject] IJSRuntime runtime { get; set; }
+
+    public Perfil perfil;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        int id = await runtime.InvokeAsync<int>("sessionStorage.getIteem", "Id");
+        string name = await runtime.InvokeAsync<string>("sessionStorage.getIteem", "Name");
+        string tipo = await runtime.InvokeAsync<string>("sessionStorage.getIteem", "Tipo");
+        perfil = new Perfil
+            {
+                Id = id,
+                Name = name,
+                Tipo = tipo
+            };
+        
+    }
+}
