@@ -50,9 +50,16 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" Text="Amount payable:$400,00"/>
-                    <Button Text="Add to cart" HorizontalOptions="EndAndExpand"/>
+                    <Button Clicked="Button_Clicked" Text="Add to cart" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
             </StackLayout>
+            <Frame BorderColor="Black" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="1">
+                    <Button Clicked="Button_Clicked_1" Margin="0" Padding="0" FontAttributes="Bold" Text="Services" BackgroundColor="LightBlue" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked_2" Text="Cart" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked_3" Text="About" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Black"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

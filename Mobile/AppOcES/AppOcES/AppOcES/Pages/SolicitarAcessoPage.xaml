@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppOcES.Pages.SolicitarAcessoPage"
+             Title="Solicitar Acesso"
+             >
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <StackLayout Margin="20,50">
+                <Image Source="logo.png"/>
+            </StackLayout>
+            <StackLayout Margin="25,10">
+                <StackLayout Orientation="Horizontal">
+                    <Image WidthRequest="40" Source="token.png"/>
+                    <Entry HorizontalOptions="FillAndExpand" Placeholder="Matricula"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Margin="0,50">
+                <Button Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand" WidthRequest="300" Text="ENVIAR"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

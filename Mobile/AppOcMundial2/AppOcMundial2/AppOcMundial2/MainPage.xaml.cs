@@ -33,8 +33,8 @@ namespace AppOcMundial2
             {
                 DisplayAlert("Aviso", "Login Realizado com Sucesso!", "Ok");
                 UsuarioLogado= usuLogado;
-                App.Current.MainPage = new TabPages();
-                //Navigation.PushAsync(new NavigationPage(new ServicePage()));
+                App.Current.MainPage = new ServicePage();
+                
             }
         }
     }

@@ -2,14 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppOcMundial2.Pages.ServicePage"
-             Title="qwdnqwnqwjn"
              >
-           
+
 
     <ContentPage.Content>
         <StackLayout Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout  BackgroundColor="LightGray" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0">
-                <Label Text="Seoul Stay - Services Menu" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
+                <Label x:Name="txtTitle" Text="Seoul Stay - Services Menu" FontSize="23" VerticalTextAlignment="Center" Padding="15"/>
             </StackLayout>
             <StackLayout Margin="20,0">
                 <Label x:Name="txtUsername" Text="{Binding Username,StringFormat='Welcome {0}'}"/>
@@ -27,6 +26,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Frame BorderColor="Black" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="1">
+                    <Button Margin="0" Padding="0" FontAttributes="Bold" Text="Services" BackgroundColor="LightBlue" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked" Text="Cart" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked_1" Text="About" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Black"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppOcMundial2.Pages
+namespace AppOcES.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TabPages : TabbedPage
+    public partial class SolicitarAcessoPage : ContentPage
     {
-        public TabPages ()
+        public SolicitarAcessoPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

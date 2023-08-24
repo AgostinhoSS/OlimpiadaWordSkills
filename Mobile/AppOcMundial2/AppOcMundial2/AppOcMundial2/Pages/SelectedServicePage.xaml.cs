@@ -24,12 +24,31 @@ namespace AppOcMundial2.Pages
             InitializeComponent();
             txtTitle.BindingContext = service;
             HttpClient client = new HttpClient();
-            string json = client.GetStringAsync("http://172.24.80.1:8095/api/Services").Result;
+            string json = client.GetStringAsync("http://10.140.4.104:8091/api/Services").Result;
             List<Services> services = JsonConvert.DeserializeObject<List<Services>>(json);
+            services = services.Where(x => x.ServiceTypeID == service.ID).ToList();
             Services selectedUser = services.Where(x => x.ServiceTypeID == service.ID).FirstOrDefault<Services>();
+
             txtDescricao.BindingContext = service;
-            ListaServices = new ObservableCollection<Services>(services);
-            lvServices.ItemsSource = ListaServices;
+            if (services.Count != 0)
+            {
+                ListaServices = new ObservableCollection<Services>(services);
+                lvServices.ItemsSource = ListaServices;
+            }
+            else
+            {
+                ListaServices = new ObservableCollection<Services>() 
+                {
+                    new Services()
+                    { 
+                        Name = "Não há serviços Cadastrados!",
+                        
+                    }
+                };
+                lvServices.ItemsSource = ListaServices;
+            }
+            
+
         }
 
         private void lvServices_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -45,7 +64,27 @@ namespace AppOcMundial2.Pages
 
             }
 
-            
+
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new NavigationPage(new ServicePage());
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new ServicePage();
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new CartPage();
+        }
+
+        private void Button_Clicked_3(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new AboutPage();
         }
     }
 }

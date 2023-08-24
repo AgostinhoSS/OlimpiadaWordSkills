@@ -16,5 +16,15 @@ namespace AppOcMundial2.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage=new ServicePage();
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new CartPage();
+        }
     }
 }

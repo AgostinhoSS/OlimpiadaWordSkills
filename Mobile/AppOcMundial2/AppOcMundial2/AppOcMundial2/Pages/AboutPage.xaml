@@ -14,6 +14,14 @@
                 <Label FontAttributes="Bold" FontSize="25" Text="Seoul Stay Addon Services" HorizontalTextAlignment="Center"/>
                 <Label FontAttributes="Bold" Text="V.1.0" HorizontalTextAlignment="Center"/>
             </StackLayout>
+            <Frame BorderColor="Black" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="1">
+                    <Button Clicked="Button_Clicked" Margin="0" Padding="0" FontAttributes="Bold" Text="Services" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked_1" Text="Cart" BackgroundColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button  Text="About" BackgroundColor="LightBlue" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Black"/>
+                </StackLayout>
+            </Frame>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

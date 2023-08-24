@@ -23,7 +23,7 @@ namespace AppOcMundial2.Pages
             InitializeComponent();
             txtUsername.BindingContext = usuarioLogado;
             HttpClient client = new HttpClient();
-            string json = client.GetStringAsync("http://172.24.80.1:8095/api/ServiceTypes").Result;
+            string json = client.GetStringAsync("http://10.140.4.104:8091/api/ServiceTypes").Result;
             List<ServiceType> listaServices = JsonConvert.DeserializeObject<List<ServiceType>>(json);
             Services = new ObservableCollection<ServiceType>(listaServices);
             ListaServices.ItemsSource = Services;
@@ -44,6 +44,16 @@ namespace AppOcMundial2.Pages
                 
                
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new CartPage();
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new AboutPage();
         }
     }
 }

@@ -7,24 +7,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppOcMundial2.Pages
+namespace AppOcES.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CartPage : ContentPage
+    public partial class DefinirSenhaPage : ContentPage
     {
-        public CartPage()
+        public DefinirSenhaPage()
         {
             InitializeComponent();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new ServicePage();
-        }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new AboutPage();
         }
     }
 }
