@@ -1,0 +1,18 @@
+﻿@page "/cursos"
+
+
+<div class="row">
+    @foreach (var item in listaCursos)
+    {
+      
+        <CardComponent Perfil="item"></CardComponent>
+    }
+</div>
+
+
+@code {
+    
+    List<string> listaCursos = new List<string> { "a", "b", "c" };
+
+
+}

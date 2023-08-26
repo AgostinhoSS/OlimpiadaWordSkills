@@ -12,7 +12,7 @@
         <StackLayout Margin="25,10">
             <StackLayout Orientation="Horizontal">
                 <Image WidthRequest="40" Source="perfil.png"/>
-                <Entry HorizontalOptions="FillAndExpand" Placeholder="Matricula"/>
+                 <Entry Keyboard="Numeric" x:Name="txtMatricula" MaxLength="11" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand" Placeholder="Matricula"/>
             </StackLayout>
             <StackLayout  Orientation="Horizontal">
                 <Image WidthRequest="40" Source="senha.png"/>

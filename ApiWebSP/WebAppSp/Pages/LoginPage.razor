@@ -1,0 +1,48 @@
+﻿@page "/login"
+@using WebAppSp.Data.Models;
+@layout LoginLayout
+
+
+<EditForm Model="@login" OnSubmit="@SubmitLogin">
+    <div class="row">
+        <div class="col-12 p-5">
+            <img class="img-fluid" src="img/logo.png" />
+        </div>
+        <div class="col-12 text-center">
+            <InputText class="form-control" @bind-Value=login.email type="email"></InputText>
+        </div>
+        <div class="col-12 text-center">
+            <InputText class="form-control" @bind-Value=login.senha type="password"></InputText>
+        </div>
+        <div class="col-12 mt-4 text-center">
+            <button type="submit" class="btn btn-success w-50">Entrar</button>
+        </div>
+    </div>
+</EditForm>
+
+
+
+@code {
+    [Inject] IJSRuntime Runtime { get; set; }
+    [Inject] NavigationManager Navigation { get; set; }
+    LoginModel login = new LoginModel();
+
+
+
+    private async void SubmitLogin()
+    {
+        HttpClient client = new HttpClient();
+        PerfilModel perfil = await client.GetFromJsonAsync<PerfilModel>($"https://localhost:44313/api/pessoas/login?email={login.email}&senha={login.senha}");
+        if (perfil.Erro == true)
+        {
+            //exibir mensagem perfil.mensagem
+        }
+        else
+        {
+            Runtime.InvokeVoidAsync("sessionStorage.setItem", "Nome", perfil.Nome);
+            Runtime.InvokeVoidAsync("sessionStorage.setItem", "Tipo", perfil.Tipo);
+            Runtime.InvokeVoidAsync("sessionStorage.setItem", "Id", perfil.IdPerfil);
+            Navigation.NavigateTo("/");
+        }
+    }
+}

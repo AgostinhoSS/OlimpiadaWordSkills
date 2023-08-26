@@ -1,0 +1,35 @@
+﻿@using WebAppSp.Data.Models;
+<div class="col-md-3">
+    <div class="card" @onmouseover="ShowBack" @onmouseout="ShowFront">
+        @if (showFront)
+        {
+            <div class="card-body">
+                <h5 class="card-title">Frente do Card</h5>
+                <p class="card-text">Conteúdo da frente.</p>
+            </div>
+        }
+        else
+        {
+            <div class="card-body bg-light">
+                <h5 class="card-title">Verso do Card</h5>
+                <p class="card-text">Informações detalhadas.</p>
+            </div>
+        }
+    </div>
+</div>
+@code {
+    [Parameter] public PerfilModel Perfil { get; set; }
+
+    bool showFront = true;
+
+    
+    void ShowBack()
+    {
+        showFront = false;
+    }
+
+    void ShowFront()
+    {
+        showFront = true;
+    }
+}

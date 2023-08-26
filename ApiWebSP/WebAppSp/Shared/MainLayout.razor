@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+<div>
+    <NavLink class="navbar navbar-nav p-2">
+        <div class="nav nav-justified navbar-light">
+            <img src="img/Logo.png" class="w-25" />
+            <NavLink class="nav-item" href="/">Home</NavLink>
+            <NavLink class="nav-item" href="/cursos">Cursos</NavLink>
+            <button onclick="@EntrarClicked" class="btn btn-success">Entrar</button>
+        </div>
+    </NavLink>
+
+    <main>
+
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+    [Inject] NavigationManager Navigation {get;set;}
+    private void EntrarClicked()
+    {
+        Navigation.NavigateTo("/login");
+    }
+}
